@@ -1,0 +1,14 @@
+{
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+    "xml.validation.enabled": false,
+    "files.associations": {
+        "*.asm": "asm-intel-x86-generic",
+        "*.inc": "asm-intel-x86-generic",
+        "linker.ld": "linkerscript",
+        "gdb_init_real_mode.txt": "gdb",
+    },
+}
