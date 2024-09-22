@@ -1,12 +1,12 @@
 <div align="center">
-    <font size="6"> 实验一 操作系统引导 </font>
+    <font size="6">实验一 操作系统引导</font>
 </div>
 
 <div align="center">
-    <font size="4"> 谷建华 </font>
+    <font size="4">谷建华</font>
 </div>
 <div align="center">
-    <font size="4"> 2024-09-18 v0.6 </font>
+    <font size="4">2024-09-18 v0.6</font>
 </div>
 
 # 实验目的
@@ -98,17 +98,17 @@
 
 在 x86 类型的计算机启动的时候，即摁下电源开关时，系统会首先运行固件程序 firmware。
 
-固件程序由硬件厂商已经硬编码好的，在此次实验环境下是 bios 程序，bios 会按某种顺序遍历所有可能的硬件存储设备（软驱/硬盘/光盘）寻找启动引导设备。
+固件程序由硬件厂商已经硬编码好的，在此次实验环境下是 BIOS 程序，BIOS 会按某种顺序遍历所有可能的硬件存储设备（软驱/硬盘/光盘）寻找启动引导设备。
 
 启动引导设备需要满足的要求是它的第 0 个扇区（一般是 0 柱面、0 磁道、0 扇区，一个扇区有 512 字节）的最后两个字节数据为 `0xaa55`（硬件厂商规定）。
 
-如果 bios 发现一个设备满足启动引导设备要求，则会将该设备的第 0 个扇区加载到内存中的 `0:0x7c00` 处，最后将 pc 跳至 `0:0x7c00`，将执行流交给引导程序.也就是说，广义上讲，我们的操作系统的第一条指令就是在 `0:0x7c00`。
+如果 BIOS 发现一个设备满足启动引导设备要求，则会将该设备的第 0 个扇区加载到内存中的 `0:0x7c00` 处，最后将 pc 跳至 `0:0x7c00`，将执行流交给引导程序。也就是说，广义上讲，我们的操作系统的第一条指令就是在 `0:0x7c00`。
 
 ## 创建 boot 镜像
 
 此次实验通过 qemu 虚拟机完成，虚拟机可以简单理解为模拟真实硬件环境的软件，在使用虚拟模拟硬件环境之前，我们需要先准备一个启动引导（以下称为 boot）设备。
 
-准备 boot 设备需要先编写一个 boot 程序，文件夹下的 `boot.asm` 存储的是启动引导的汇编源代码，通过下列命令可以将它编译成二进制文件:
+准备 boot 设备需要先编写一个 boot 程序，文件夹下的 `boot.asm` 存储的是启动引导的汇编源代码，通过下列命令可以将它编译成二进制文件：
 
 ```shell
 nasm boot.asm -o boot.bin
@@ -126,9 +126,9 @@ stat ./boot.bin # 验证文件大小
 在写完 boot 程序后，这个程序本身就可以作为一个镜像文件挂在到虚拟机上，通过以下命令可以运行虚拟机并把 boot.bin 挂载到硬盘上：
 
 ```shell
-qemu-system-i386                    \ # 运行的虚拟机环境为i386
-    -boot order=c                   \ # 运行的时候首先检查硬盘有没有启动引导程序
-    -drive file=boot.bin,format=raw   # 抽象 boot.bin 成为一个硬盘设备，模拟挂在到虚拟环境中
+qemu-system-i386                    \
+    -boot order=c                   \
+    -drive file=boot.bin,format=raw
 ```
 
 > make 使用 sh 为默认 shell，该 sh 链接到 bash
@@ -142,8 +142,6 @@ qemu-system-i386                    \ # 运行的虚拟机环境为i386
 为了能够让启动过程细化，我们还支持了对虚拟机的 gdb 调试，命令如下：
 
 ```shell
-# -S 让指令停在 bios 程序的第一条指令，为了能够让 gdb 操作
-# -s 让虚拟机开放 1234 端口供 gdb 调试（数据通过本地回环网络 tcp 传输）
 qemu-system-i386                    \
     -boot order=c                   \
     -drive file=boot.bin,format=raw \
@@ -151,12 +149,6 @@ qemu-system-i386                    \
 ```
 
 ```shell
-# -ex 在进入 gdb 的时候自动填入命令，减少手工输入的时间
-# set tdesc filename target.xml
-# 由于 boot 程序运行环境为 16 位，默认情况下 gdb 不能支持 16 位指令的解析，需要导入 xml 文件让解析正常
-# xml 文件在同文件夹下
-# target remote localhost: 1234
-# 让 gdb 连接 1234 端口用于开始调试
 gdb -ex 'set tdesc filename target.xml' \
     -ex 'target remote localhost:1234'
 ```
@@ -164,6 +156,8 @@ gdb -ex 'set tdesc filename target.xml' \
 开启两个终端，一个用于开启虚拟机，另一个用于开启 gdb，就能通过 gdb 调试虚拟机。
 
 **关于提供给 gdb 的 xml 文件**
+
+由于 boot 程序运行环境为 16 位，默认情况下 gdb 不能支持 16 位指令的解析，需要导入 xml 文件让解析正常。
 
 i386-32bit.xml 具体指定了目标架构中的寄存器信息供 gdb 解析使用。
 
