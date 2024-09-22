@@ -16,6 +16,7 @@ DispStr:
     ret
 
 BootMessage:
-    db      "Hello, OS world!"
+    db      "Hi OS"
+
     times   510-($-$$) db 0     ; 填充剩下的空间，使生成的二进制代码恰好为 512 字节
     dw      0xaa55              ; 结束标志
