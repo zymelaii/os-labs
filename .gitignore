@@ -60,3 +60,7 @@ dkms.conf
 obj/*
 build/*
 .*/*
+
+*.bin
+*.img
+*.log
