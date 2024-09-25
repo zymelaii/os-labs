@@ -20,7 +20,7 @@
 - 如何制作系统盘
 - QEMU 启动
 - 调试方法
-- 关于汇编格式的补充
+- 关于汇编的补充
 
 # 编译的基本要求
 
@@ -221,10 +221,16 @@ layout asm           # 显示汇编窗口
 layout regs          # 显示寄存器窗口
 ```
 
-# 关于汇编格式的补充
+# 关于汇编的补充
 
 对于 x86，GCC 套件及 GDB 反汇编的默认汇编表示为 AT&T 格式，而在实验中我们使用的是 Intel 格式，该项差异或许会对大家实验的进行产生一定的困扰。
 
 对于 GDB，请使用 `set disassembly-flavor intel` 切换至 Intel 格式。
 
 对于 objdump，请使用 `-M intel` 参数切换至 Intel 格式。
+
+若需要使用 objdump 反汇编非 elf 格式的 raw binary，可以搭配 `-b` `-m` 分别指定文件格式与架构，如：
+
+```shell
+objdump -b binary -m i386 -D target.bin
+```
