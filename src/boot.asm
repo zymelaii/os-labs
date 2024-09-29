@@ -146,8 +146,8 @@ Init:
     ; use temporary stack for fn call
     mov     sp, OffsetOfBoot
 
-    mov    	ax, 0x0003
-    int    	10h
+    mov     ax, 0x0003
+    int     10h
 
     mov     dh, MSG_Booting
     call    ShowMessage
