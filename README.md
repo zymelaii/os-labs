@@ -2,6 +2,22 @@
 
 该仓库提供各次小实验的基准代码，每次小实验会在 repo 的各分支发布，如第一次实验将发布在 lab1 分支，依此类推。
 
+## ATTENTION
+
+当你看到我时，你会发现其实我的地址在 [仓库链接](https://gitee.com/pilot_2024/os-labs)。
+
+如果确实是这样的话，那么恭喜你，好心的助教已经帮你完成了几乎全部工作，后面小节的 **部分** 内容就不需要再看了！
+
+你只需要回到 [组织仓库页](https://gitee.com/organizations/pilot_2024/projects) 翻找到你对应的学号并进入，点击中间靠右上的橙色按钮 **克隆/下载**，复制第一行 https 开头的链接，对它执行以下命令即可：
+
+> 此处假设你复制得到的链接是 https://gitee.com/pilot_2024/2022301111-OS.git，请对照自己的链接进行替换
+
+```shell
+git clone https://gitee.com/pilot_2024/os-labs.git 2022301111-OS
+cd 2022301111-OS
+git remote set-url --push origin https://gitee.com/pilot_2024/2022301111-OS.git
+```
+
 ## 准备工作
 
 进入侧边栏的 **代码** 页面，点击新建仓库并保证以下内容：
