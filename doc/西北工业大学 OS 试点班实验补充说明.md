@@ -74,7 +74,7 @@ ld -m elf_i386 -T linker.ld --oformat binary -o target.bin obj1.o obj2.o
 - **-O0** 关闭优化（保证代码语义，便于调试）
 - **-gnu99** 使用 GNU C99 语言标准
 - **-fno-stack-protector** 禁用栈溢出保护机制
-- **-MD** 编译的同时产出 *.d 依赖指示文件（可用于 Makefile 判断目标是否脏）
+- **-MD** 编译的同时产出 \*.d 依赖指示文件（可用于 Makefile 判断目标是否脏）
 
 # 如何制作系统盘
 
