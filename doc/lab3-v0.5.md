@@ -734,7 +734,7 @@ clangd 要求一个编译数据库 compile_commands.json 进行工作，CMake �
 
 ```shell
 sudo apt-get install cmake pkg-config
-sudo apt-get install nlohmann-json3-dev libfmt-dev libspdlog-dev libgrpc++-dev libprotobuf-dev
+sudo apt-get install nlohmann-json3-dev libfmt-dev libspdlog-dev libgrpc++-dev libprotobuf-dev libssl-dev
 git clone https://github.com/rizsotto/Bear.git
 cd Bear
 cmake -B build -S . -DENABLE_UNIT_TESTS=OFF -DENABLE_FUNC_TESTS=OFF
