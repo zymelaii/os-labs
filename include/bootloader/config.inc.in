@@ -1,0 +1,3 @@
+%macro DeclareKernelFAT 1
+    %1 db "@KERNEL_FAT_NAME@"
+%endmacro

@@ -1,0 +1,3 @@
+#pragma once
+
+#define KERNEL_ELF @KERNEL_LOAD_ADDR@
