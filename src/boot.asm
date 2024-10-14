@@ -19,7 +19,6 @@ Start:
 ; variables
 EndOfBuffer   dw 0 ; end of boot buffer; global constant for traversal of fat entries to find loader
 SecOfDataZone dd 0 ; base sector of data zone in fat32; global constant for method ReadCluster
-AddressLBA    dd 0 ; LBA address; local var for method ReadSector
 
 ; rodata
 LoaderName db "LOADER  BIN" ; fat32 short file name of our loader file
@@ -87,7 +86,6 @@ ReadSector:
     mov     word [si + Packet_Sectors], cx
     mov     word [si + Packet_BufferOffset], bx
     mov     word [si + Packet_BufferSegment], es
-    add     eax, [AddressLBA]
     mov     dword [si + Packet_StartSectors], eax
     mov     dword [si + Packet_StartSectors + 4], 0
 
