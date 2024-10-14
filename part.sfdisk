@@ -2,7 +2,6 @@ label: dos
 label-id: 0x49f21634
 device: disk.img
 unit: sectors
-sector-size: 512
 
 disk.img1: start=2048, size=2048, type=4
 disk.img2: start=4096, size=2880, type=1, bootable
