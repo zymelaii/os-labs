@@ -738,7 +738,7 @@ sudo apt-get install nlohmann-json3-dev libfmt-dev libspdlog-dev libgrpc++-dev l
 git clone https://github.com/rizsotto/Bear.git
 cd Bear
 cmake -B build -S . -DENABLE_UNIT_TESTS=OFF -DENABLE_FUNC_TESTS=OFF
-cmake --build build --target install
+sudo cmake --build build --target install
 ```
 
 > 如果无法连接到 GitHub 或网络不稳定的话，或许你可以参考 [这篇文章](https://www.cnblogs.com/RioTian/p/17986762) 为你的 WSL2 配置代理
