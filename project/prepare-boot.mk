@@ -17,8 +17,14 @@ include $(PROJMK_PREFIX)collect-objects.mk
 LOADER_SIZE_LIMIT := $(shell echo $$[ 0x10000 ])
 
 # loader objects
-LOADER_OBJECTS := $(patsubst $(SRCDIR)%,$(OBJDIR)%.obj,$(SOURCE_FILES))
-LOADER_LINKER  := $(SRCDIR)$(SOURCE_DIR)linker.ld
+LOADER_OBJECTS     := $(patsubst $(SRCDIR)%,$(OBJDIR)%.obj,$(SOURCE_FILES))
+LOADER_OBJECT_FILE := $(filter %loader.asm.obj,$(LOADER_OBJECTS))
+LOADER_LINKER_IN   := $(SRCDIR)$(SOURCE_DIR)linker.ld.in
+LOADER_LINKER      := $(OBJDIR)linker.ld
+
+ifeq ($(LOADER_OBJECT_FILE),)
+	$(error loader.asm.obj not found)
+endif
 
 LOADER_FILE := $(OBJDIR)boot/loader.bin
 

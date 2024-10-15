@@ -39,6 +39,19 @@ $(GENERATED_INCDIR)/%.inc: include/bootloader/%.inc.in $(ENVS)
 		$(call end-job,done,generate,$(notdir $@));    \
 	fi
 
+# generated linker scripts
+$(LOADER_LINKER): $(LOADER_LINKER_IN) $(ENVS)
+	@$(call begin-job,generate,$(notdir $@))
+	@mkdir -p $(@D)
+	@cp $< $@.swp
+	@$(call configure-file,$@.swp);                    \
+	if cmp -s $@ $@.swp; then                          \
+		$(call end-job,skip,generate,$(notdir $@));    \
+	else                                               \
+		cp $@.swp $@;                                  \
+		$(call end-job,done,generate,$(notdir $@));    \
+	fi
+
 # generated headers for kernel & lib
 $(GENERATED_INCDIR)/%.h: include/%.h.in $(ENVS)
 	@$(call begin-job,generate,$(notdir $@))

@@ -43,6 +43,13 @@ IMAGE_FILE := $(OBJDIR)$(IMAGE_NAME).img
 # partition file for image
 PARTITION_FILE := part.sfdisk
 
+# memory layout of loader
+LOADER_LOAD_BASE   := 0x9000
+LOADER_LOAD_OFFSET := 0x0400
+LOADER_PHY_BASE    := $(shell \
+printf "0x%08x" "$$[ $(LOADER_LOAD_BASE) * 16 ]" \
+)
+
 # output kernel
 KERNEL_FULL_NAME       := $(KERNEL_NAME).bin
 KERNEL_DEBUG_FULL_NAME := $(KERNEL_NAME)d.bin

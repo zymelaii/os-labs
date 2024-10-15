@@ -1,14 +1,14 @@
 OUTPUT_FORMAT("elf32-i386", "elf32-i386", "elf32-i386")
 OUTPUT_ARCH(i386)
 ENTRY(_start)
-BASE_ADDRESS = 0x400;
-LOADER_SEG_PHYADDR = 0x90000;
+BASE_ADDRESS = @LOADER_LOAD_OFFSET@;
+LOADER_SEG_PHYADDR = @LOADER_PHY_BASE@;
 
 SECTIONS
 {
     . = BASE_ADDRESS;
     .text.s16 : {
-        build/loader/loader.asm.obj(.text.s16)
+        @LOADER_OBJECT_FILE@(.text.s16)
     }
 
     . = ALIGN(32);
