@@ -10,7 +10,7 @@ extern gdt_ptr
 
     global _start
 _start:
-    mov    esp, StackTop
+    mov     esp, StackTop
 
     sgdt    [gdt_ptr]           ; save current gdt to gdt_ptr
     call    cstart              ; gdt_ptr will be updated in cstart
@@ -18,7 +18,7 @@ _start:
 
     ; use a long jmp to activate the new gdt immediately
     SELECTOR_KERNEL_CS equ 0x08
-    jmp SELECTOR_KERNEL_CS:csinit
+    jmp     SELECTOR_KERNEL_CS:csinit
 
 csinit:
     hlt
