@@ -395,7 +395,7 @@ dd if=boot.bin of=/dev/loop0p2 seek=114 skip=514 bs=1919 count=810
 
 1. 加载 GDT
 2. 打开地址线 A20
-3. 将 cr0 第 0 位 1
+3. 将 cr0 第 0 位置 1
 
 完成以上操作后，通过一个 32 位的长跳转指令跳转到 `SelectorFlatC:ProtectMain`，我们的执行环境便就从 16 位变成了 32 位，同时也是从实模式跳到了保护模式。
 
