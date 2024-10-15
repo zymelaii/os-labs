@@ -89,7 +89,7 @@ format: #<! format *.c and *.h files using clang-format
 .PHONY: format
 
 dup-cc-win: $(OBJDIR)compile_commands.json #<! dump clangd compile_commands.json for windows
-	@sed -i 's/\/usr\/sbin\/gcc/gcc/g' $<
+	@sed -r -i 's/(\/[a-z]+)*\/?(gcc|g\+\+)/\2/g' $<
 	@sed -r -i 's/\/mnt\/([a-z])\//\1:\//g' $<
 
 dup-cc: $(OBJDIR)compile_commands.json #<! dump clangd compile_commands.json
