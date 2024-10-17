@@ -52,7 +52,7 @@ monitor: $(KERNEL_DEBUG_FILE) #<! run monitor for qemu
 		-ex 'layout-sac' \
 		-ex "file $<"    \
 		-ex 'b _start'   \
-		-ex 'c';         \
+		-ex 'c'
 .PHONY: monitor
 
 monitor-real: $(KERNEL_DEBUG_FILE) $(GDB_REALMODE_XML) #<! run monitor for qemu in real mode
@@ -66,7 +66,7 @@ monitor-real: $(KERNEL_DEBUG_FILE) $(GDB_REALMODE_XML) #<! run monitor for qemu 
 		-ex "file $<"                             \
 		-ex 'set tdesc filename $(word 2,$^)'     \
 		-ex 'b *0x7c00'                           \
-		-ex 'c';                                  \
+		-ex 'c'
 .PHONY: monitor-real
 
 format: #<! format *.c and *.h files using clang-format
