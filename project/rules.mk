@@ -62,6 +62,7 @@ monitor-real: $(KERNEL_DEBUG_FILE) $(GDB_REALMODE_XML) #<! run monitor for qemu 
 		exit;                                     \
 	fi;                                           \
 	$(GDB) $(GDB_FLAGS)                           \
+		-ex 'file $<'                             \
 		-ex 'layout-rac'                          \
 		-ex 'set tdesc filename $(word 2,$^)'     \
 		-ex 'b *0x7c00'                           \
