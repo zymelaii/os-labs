@@ -2,14 +2,14 @@ ENVS         := $(OBJDIR).cache/.envs
 CACHED_FILES += $(ENVS)
 
 define configure-file
-	vars=`cat $(1) | grep -Po '(?<=@)\w+(?=@)' | tr '\n' ' '`;   \
-	cat $(ENVS) | while IFS= read -r row; do                     \
-		read -r key value <<<                                    \
-			`echo "$${row}" | awk -F' = ' '{print $$1, $$2}'`;   \
-		if [[ " $${vars} " =~ " $${key} " ]]; then               \
-			subst=$$(echo $${value} | sed -r 's/([/\])/\\\1/g'); \
-			sed -i "s/@$${key}@/$${subst}/g" $(1);               \
-		fi;                                                      \
+	vars=`cat $(1) | grep -Po '(?<=@)\w+(?=@)' | tr '\n' ' '`;     \
+	cat $(ENVS) | while IFS= read -r row; do                       \
+		read -r key value <<<                                      \
+			`echo "$${row}" | awk -F' = ' '{print $$1, $$2}'`;     \
+		if [[ " $${vars} " =~ " $${key} " ]]; then                 \
+			subst=$$(echo "$${value}" | sed -r 's/([/\])/\\\1/g'); \
+			sed -i "s/@$${key}@/$${subst}/g" $(1);                 \
+		fi;                                                        \
 	done
 endef
 
