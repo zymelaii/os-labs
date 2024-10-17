@@ -37,4 +37,5 @@ ShowMessage:
 %macro NewMessage 2
     MSG_%1 equ ($ - OffsetOfEmbeddedMsg) / MsgLen
     db %2
+    times OffsetOfEmbeddedMsg + (MSG_%1 + 1) * MsgLen - $ db 0
 %endmacro
