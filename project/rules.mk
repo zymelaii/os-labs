@@ -63,7 +63,7 @@ monitor-real: $(KERNEL_DEBUG_FILE) $(GDB_REALMODE_XML) $(GDB_REALMODE_SCRIPT) #<
 	fi;                                           \
 	$(GDB) $(GDB_FLAGS)                           \
 		-ex 'set tdesc filename $(word 2,$^)'     \
-	    -x '$(word 3,$^)'                         \
+		-x '$(word 3,$^)'                         \
 		-ex 'file $<'                             \
 		-ex 'enter-real-mode'                     \
 		-ex 'b *0x7c00'                           \
