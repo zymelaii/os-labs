@@ -4,8 +4,9 @@
 
 GDB ?= gdb
 
-GDB_SCRIPTS_HOME ?=
-GDB_REALMODE_XML := $(GDB_SCRIPTS_HOME)target.xml
+GDB_SCRIPTS_HOME    ?=
+GDB_REALMODE_XML    := $(GDB_SCRIPTS_HOME)target.xml
+GDB_REALMODE_SCRIPT := $(GDB_SCRIPTS_HOME)gdb_init_real_mode.txt
 
 GDB_FLAGS ?=
 GDB_FLAGS += -q -nx

@@ -55,16 +55,17 @@ monitor: $(KERNEL_DEBUG_FILE) #<! run monitor for qemu
 		-ex 'c'
 .PHONY: monitor
 
-monitor-real: $(KERNEL_DEBUG_FILE) $(GDB_REALMODE_XML) #<! run monitor for qemu in real mode
+monitor-real: $(KERNEL_DEBUG_FILE) $(GDB_REALMODE_XML) $(GDB_REALMODE_SCRIPT) #<! run monitor for qemu in real mode
 	@\
 	if [ ! -e "$<" ]; then                        \
 		$(call end-job,fail,missing debug file,); \
 		exit;                                     \
 	fi;                                           \
 	$(GDB) $(GDB_FLAGS)                           \
-		-ex 'file $<'                             \
-		-ex 'layout-rac'                          \
 		-ex 'set tdesc filename $(word 2,$^)'     \
+	    -x '$(word 3,$^)'                         \
+		-ex 'file $<'                             \
+		-ex 'enter-real-mode'                     \
 		-ex 'b *0x7c00'                           \
 		-ex 'c'
 .PHONY: monitor-real
