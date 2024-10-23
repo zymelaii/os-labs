@@ -1,0 +1,4 @@
+#pragma once
+
+#define KERNEL_ELF @KERNEL_LOAD_ADDR@
+#define KERNEL_FAT_NAME "@KERNEL_FAT_NAME@"
