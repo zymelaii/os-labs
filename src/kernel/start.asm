@@ -35,14 +35,14 @@ _start:
     ; use a long jmp to activate the new gdt immediately
     jmp     SELECTOR_KERNEL_CS:cinit
 
-	global cinit
+    global cinit
 cinit:
-	mov     ax, SELECTOR_KERNEL_DS
-	mov     ds, ax
-	mov     es, ax
-	mov     fs, ax
-	mov     ss, ax
-	mov     ax, SELECTOR_KERNEL_GS
-	mov     gs, ax
+    mov     ax, SELECTOR_KERNEL_DS
+    mov     ds, ax
+    mov     es, ax
+    mov     fs, ax
+    mov     ss, ax
+    mov     ax, SELECTOR_KERNEL_GS
+    mov     gs, ax
 
-	jmp     kernel_main
+    jmp     kernel_main

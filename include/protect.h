@@ -148,7 +148,7 @@ typedef struct tss {
   u16 trap;
   u16 iobase;
 #if 0
-  u8	iomap[2];
+  u8 iomap[2];
 #endif
 } __attribute__((packed)) tss_t;
 
