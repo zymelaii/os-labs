@@ -1,11 +1,13 @@
 #include <arch/x86.h>
 #include <assert.h>
 #include <gameplay.h>
-#include <interrupt.h>
+#include <keyboard.h>
 #include <process.h>
 #include <protect.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <terminal.h>
+#include <time.h>
 
 //! 内核重入计数，为当前内核需要处理中断的数量
 int k_reenter;
@@ -13,30 +15,35 @@ int k_reenter;
 //! 执行用户进程的入口
 void restart();
 
+#pragma GCC push_options
+#pragma GCC optimize("O0")
+static void busy_delay() {
+  for (int j = 0; j < 5e7; ++j) {
+  }
+}
+#pragma GCC pop_options
+
 void TestA() {
   int i = 0;
-  while (1) {
+  while (true) {
     kprintf("A%d.", i++);
-    for (int j = 0; j < 5e7; ++j) {
-    }
+    busy_delay();
   }
 }
 
 void TestB() {
   int i = 0;
-  while (1) {
+  while (true) {
     kprintf("B%d.", i++);
-    for (int j = 0; j < 5e7; ++j) {
-    }
+    busy_delay();
   }
 }
 
 void TestC() {
   int i = 0;
-  while (1) {
+  while (true) {
     kprintf("C%d.", i++);
-    for (int j = 0; j < 5e7; ++j) {
-    }
+    busy_delay();
   }
 }
 
@@ -50,11 +57,11 @@ const char *color_print_str[] = {"\x1b[031m%c %d %d;", "\x1b[032m%c %d %d;",
  * control block) of this process
  */
 void TestABC(const char *fmt, char id, process_t *my_pcb) {
+  todo("ensures that the arguments are passed correctly from caller");
   int i = 0;
-  while (1) {
+  while (true) {
     kprintf(fmt, id, i++, my_pcb->pid);
-    for (int j = 0; j < 5e7; ++j) {
-    }
+    busy_delay();
   }
 }
 
@@ -102,7 +109,8 @@ void kernel_main() {
 
   p_proc_ready = pcb_table;
 
-  put_irq_handler(CLOCK_IRQ, clock_handler);
+  init_sysclk();
+  init_keyboard();
 
   restart();
   unreachable();

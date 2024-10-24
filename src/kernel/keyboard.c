@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <interrupt.h>
 #include <keymap.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -17,6 +18,11 @@ static kb_inbuf_t KB_INPUT = {
     .p_tail = KB_INPUT.buf,
     .count = 0,
 };
+
+void init_keyboard() {
+  unimplemented("keyboard irq handler");
+  enable_irq(KEYBOARD_IRQ);
+}
 
 void kb_put_key(u8 ch) { unimplemented(); }
 
