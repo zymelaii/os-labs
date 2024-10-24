@@ -30,8 +30,8 @@ struct kprintfbuf {
 
 static struct kprintfbuf TTY = {
     .color = DEFAULT_COLOR,
-    .cursor_row = 1,
-    .cursor_col = 1,
+    .cursor_row = 0,
+    .cursor_col = 0,
 };
 
 void term_write_char(u16 pos, u16 char_code) {
