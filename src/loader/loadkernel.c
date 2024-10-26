@@ -11,10 +11,6 @@
 #define SECTOR_SIZE 512
 #define CLUSTER_SIZE 4096
 
-#define FAT_ADDR 0x30000  //<! where to store the fat data
-#define ELF_ADDR 0x40000  //<! where to store the elf file
-#define BUF_ADDR 0x50000  //<! buffer for reading elf segment
-
 u32 PartitionLBA;
 
 u32 fat_start_sec;

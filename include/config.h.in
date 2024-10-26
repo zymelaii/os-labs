@@ -1,4 +1,7 @@
 #pragma once
 
-#define KERNEL_ELF @KERNEL_LOAD_ADDR@
 #define KERNEL_FAT_NAME "@KERNEL_FAT_NAME@"
+
+#define FAT_ADDR @KERNEL_FAT_ADDR@ //<! where to store the fat data
+#define ELF_ADDR @KERNEL_ELF_ADDR@ //<! where to store the elf file
+#define BUF_ADDR @KERNEL_BUF_ADDR@ //<! buffer for reading elf segment

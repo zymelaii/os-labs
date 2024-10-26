@@ -36,7 +36,6 @@
 %include "fat32.inc"
 %include "packet.inc"
 %include "protect.inc"
-%include "msg_helper.inc"
 %include "paging.inc"
 
 [SECTION .text.s16]

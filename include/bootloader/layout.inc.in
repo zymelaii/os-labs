@@ -3,7 +3,6 @@ BaseOfMBR        equ 0x0000
 BaseOfBoot       equ 0x0000
 BaseOfBootBuffer equ BaseOfBoot
 BaseOfLoader     equ @LOADER_LOAD_BASE@
-BaseOfKernel     equ @KERNEL_LOAD_BASE@
 
 SizeOfSector     equ 512
 SizeOfBootBuffer equ SizeOfSector
@@ -16,11 +15,8 @@ OffsetOfBPB        equ OffsetOfBoot
 OffsetOfBootBuffer equ OffsetOfBoot + SizeOfSector
 OffsetOfBootMain   equ OffsetOfBPB + SizeOfBPB
 OffsetOfLoader     equ @LOADER_LOAD_OFFSET@
-OffsetOfKernel     equ @KERNEL_LOAD_OFFSET@
 
 PhyPageDirBase   equ 0x200000 ; base addr of page directory [2M]
 PhyPageTableBase equ 0x201000 ; base addr of page table [2M+4K]
 
 PhyLoaderBase  equ BaseOfLoader << 4
-PhyKernelBase  equ BaseOfKernel << 4
-PhyKernelEntry equ @KERNEL_START_ADDR@ ; entry point of kernel
