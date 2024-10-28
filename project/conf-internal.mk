@@ -44,8 +44,8 @@ IMAGE_FILE := $(OBJDIR)$(IMAGE_NAME).img
 PARTITION_FILE := part.sfdisk
 
 # memory layout of loader
-LOADER_LOAD_BASE   := 0x9000
-LOADER_LOAD_OFFSET := 0x0400
+LOADER_LOAD_BASE   := 0x1000
+LOADER_LOAD_OFFSET := 0x5000
 LOADER_PHY_BASE    := $(shell \
 printf "0x%08x" "$$[ $(LOADER_LOAD_BASE) * 16 ]" \
 )

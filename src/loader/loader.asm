@@ -11,13 +11,13 @@
 ; 0x0009fc00~0x000a0000    [STABLE] extended bios data area
 ; 0x0009fc00~0x00100000    [STABLE] reserved for hardware
 ; ---
-; 0x00090400~              loader file
-;           ~0x00090400    stack for loader in real mode
-; ---
 ; 0x00050000~              buffer for reading kernel elf segment
 ; 0x00040000~              kernel elf file
 ; 0x00030400               kernel entry point
 ; 0x00030000~              fat info/data in the current partition
+; ---
+; 0x00015000~              loader file
+;           ~0x00015000    stack for loader in real mode
 ; ---
 ; 0x00007e00~              buffer used to read sectors
 ; 0x00007c00~0x00007e00    [STABLE] boot sector
