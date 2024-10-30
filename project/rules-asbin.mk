@@ -13,5 +13,5 @@ $(LOADER_FILE): $(LOADER_OBJECTS) $(LIBR0_FILE) $(LIBRT_PUBLIC_FILE) $(LOADER_LI
 $(LOADER_DEBUG_FILE): $(LOADER_OBJECTS) $(LIBR0_FILE) $(LIBRT_PUBLIC_FILE) $(LOADER_LINKER) $(filter %.inc,$(GENERATED_FILES)) $(CACHED_FLAG_FILES)
 	@$(call begin-job,ld,$(notdir $@))
 	@mkdir -p $(@D)
-	@$(LD) $(LDFLAGS) -T $(LOADER_LINKER) -o $@ $(LOADER_OBJECTS) $(LIBR0_FILE) $(LIBRT_PUBLIC_FILE) 2>&1 /dev/null
+	@$(LD) $(LDFLAGS) -T $(LOADER_LINKER) -o $@ $(LOADER_OBJECTS) $(LIBR0_FILE) $(LIBRT_PUBLIC_FILE) > /dev/null 2>&1
 	@$(call end-job,done,ld,$(notdir $@))
