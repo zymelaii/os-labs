@@ -1,6 +1,6 @@
 ; MEMORY LAYOUT
 ; ===
-; 0xc0200000               kernel start linear address
+; 0xc0300000               kernel start linear address
 ; 0x03200000~              buffer for reading kernel elf segment
 ; 0x03100000~              kernel elf file
 ; 0x03000000~              fat info/data in the current partition
