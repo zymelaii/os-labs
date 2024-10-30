@@ -1,5 +1,6 @@
 #include <arch/x86.h>
 #include <io.h>
+#include <stdint.h>
 #include <stdio.h>
 
 extern void printfmt(void (*putch)(int, void *), void *putdat, const char *fmt,
@@ -11,14 +12,14 @@ extern void vprintfmt(void (*putch)(int, void *), void *putdat, const char *fmt,
 #define IBUF_SIZE 1024
 
 typedef struct printfbuf_t {
-  int lock;
+  uint32_t lock;
   char buf[OBUF_SIZE];
   char *buf_p;
   int cnt;
 } printfbuf_t;
 
 typedef struct getchbuf {
-  int lock;
+  uint32_t lock;
   char buf[IBUF_SIZE];
   char *st;
   char *en;
