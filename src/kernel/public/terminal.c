@@ -35,7 +35,7 @@ static struct kprintfbuf TTY = {
 };
 
 void term_write_char(u16 pos, u16 char_code) {
-  asm("mov %1, %%gs:(%0)" ::"r"(pos * 2), "r"(char_code) : "memory");
+  ((u16 *)VMEM_LIN_ADDR)[pos] = char_code;
 }
 
 void term_write_str(u16 pos, const char *str, u8 char_attr) {
