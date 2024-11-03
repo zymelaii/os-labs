@@ -206,6 +206,7 @@ SetupPaging:
 
     xor     eax, eax
     mov     eax, PG_P | PG_USU | PG_RWW
+    push    eax
 
     ; map 0~128M to 0~128M
     mov     edi, PhyPageTableBase
@@ -215,6 +216,7 @@ SetupPaging:
     loop    .pte.loop.1
 
     ; map 3G~3G+128M to 0~128M
+    pop     eax
     pop     ecx
 .pte.loop.2:
     stosd
