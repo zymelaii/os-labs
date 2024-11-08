@@ -64,3 +64,8 @@ build/*
 *.bin
 *.img
 *.log
+
+# lab6 files
+fork_ack.c
+!fork_ack.c.obj
+!firework.bin
