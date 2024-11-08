@@ -1,6 +1,7 @@
 #pragma once
 
 #include <layout.h>
+#include <macro_helper.h>
 #include <stdint.h>
 #include <sys/types.h>
 
@@ -88,6 +89,48 @@
 #define CR4_TSD 0x00000004  //<! time stamp disable
 #define CR4_PVI 0x00000002  //<! protect mode virtual interrupts
 #define CR4_VME 0x00000001  //<! v86 mode extensions
+
+//! helpful macros to declare eflags, e.g. EFLAGS(IF, IOPL(1))
+#define EFLAGS_IMPL1(x, ...) MH_EXPAND(MH_CONCAT(EFLAGS_, x))
+#define EFLAGS_IMPL2(x, _, ...) \
+  MH_EXPAND(MH_CONCAT(EFLAGS_, x)) | MH_EXPAND(EFLAGS_IMPL1(_, __VA_ARGS__))
+#define EFLAGS_IMPL3(x, _, ...) \
+  MH_EXPAND(MH_CONCAT(EFLAGS_, x)) | MH_EXPAND(EFLAGS_IMPL2(_, __VA_ARGS__))
+#define EFLAGS_IMPL4(x, _, ...) \
+  MH_EXPAND(MH_CONCAT(EFLAGS_, x)) | MH_EXPAND(EFLAGS_IMPL3(_, __VA_ARGS__))
+#define EFLAGS_IMPL5(x, _, ...) \
+  MH_EXPAND(MH_CONCAT(EFLAGS_, x)) | MH_EXPAND(EFLAGS_IMPL4(_, __VA_ARGS__))
+#define EFLAGS_IMPL6(x, _, ...) \
+  MH_EXPAND(MH_CONCAT(EFLAGS_, x)) | MH_EXPAND(EFLAGS_IMPL5(_, __VA_ARGS__))
+#define EFLAGS_IMPL7(x, _, ...) \
+  MH_EXPAND(MH_CONCAT(EFLAGS_, x)) | MH_EXPAND(EFLAGS_IMPL6(_, __VA_ARGS__))
+#define EFLAGS_IMPL8(x, _, ...) \
+  MH_EXPAND(MH_CONCAT(EFLAGS_, x)) | MH_EXPAND(EFLAGS_IMPL7(_, __VA_ARGS__))
+#define EFLAGS_IMPL9(x, _, ...) \
+  MH_EXPAND(MH_CONCAT(EFLAGS_, x)) | MH_EXPAND(EFLAGS_IMPL8(_, __VA_ARGS__))
+#define EFLAGS_IMPL10(x, _, ...) \
+  MH_EXPAND(MH_CONCAT(EFLAGS_, x)) | MH_EXPAND(EFLAGS_IMPL9(_, __VA_ARGS__))
+#define EFLAGS_IMPL11(x, _, ...) \
+  MH_EXPAND(MH_CONCAT(EFLAGS_, x)) | MH_EXPAND(EFLAGS_IMPL10(_, __VA_ARGS__))
+#define EFLAGS_IMPL12(x, _, ...) \
+  MH_EXPAND(MH_CONCAT(EFLAGS_, x)) | MH_EXPAND(EFLAGS_IMPL11(_, __VA_ARGS__))
+#define EFLAGS_IMPL13(x, _, ...) \
+  MH_EXPAND(MH_CONCAT(EFLAGS_, x)) | MH_EXPAND(EFLAGS_IMPL12(_, __VA_ARGS__))
+#define EFLAGS_IMPL14(x, _, ...) \
+  MH_EXPAND(MH_CONCAT(EFLAGS_, x)) | MH_EXPAND(EFLAGS_IMPL13(_, __VA_ARGS__))
+#define EFLAGS_IMPL15(x, _, ...) \
+  MH_EXPAND(MH_CONCAT(EFLAGS_, x)) | MH_EXPAND(EFLAGS_IMPL14(_, __VA_ARGS__))
+#define EFLAGS_IMPL16(x, _, ...) \
+  MH_EXPAND(MH_CONCAT(EFLAGS_, x)) | MH_EXPAND(EFLAGS_IMPL15(_, __VA_ARGS__))
+#define EFLAGS_IMPL17(x, _, ...) \
+  MH_EXPAND(MH_CONCAT(EFLAGS_, x)) | MH_EXPAND(EFLAGS_IMPL16(_, __VA_ARGS__))
+#define EFLAGS_IMPL18(x, _, ...) \
+  MH_EXPAND(MH_CONCAT(EFLAGS_, x)) | MH_EXPAND(EFLAGS_IMPL17(_, __VA_ARGS__))
+#define EFLAGS_IMPL(N, x, ...) \
+  MH_EXPAND(MH_CONCAT(EFLAGS_IMPL, N)(x, __VA_ARGS__))
+#define EFLAGS_WRAPPER(...) \
+  MH_EXPAND(EFLAGS_IMPL(MH_EXPAND(MH_NARG(__VA_ARGS__)), __VA_ARGS__))
+#define EFLAGS(...) (EFLAGS_WRAPPER(RESERVED, __VA_ARGS__))
 
 #define KERNEL_STACK_SIZE (8 * NUM_1K)
 

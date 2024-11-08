@@ -38,7 +38,7 @@ static int exec_fat(process_t *proc, const char *fat_name) {
 
     memset(&pcb->user_regs, 0, sizeof(pcb->user_regs));
     init_segment_regs(pcb);
-    pcb->user_regs.eflags = EFLAGS_RESERVED | EFLAGS_IF | EFLAGS_IOPL(1);
+    pcb->user_regs.eflags = EFLAGS(IF, IOPL(1));
 
     init_pagetbl(pcb);
     map_elf(pcb, elf_addr);
