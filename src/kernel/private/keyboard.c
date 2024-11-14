@@ -67,7 +67,7 @@ void keyboard_handler(int irq) {
     return;
   }
   u32 code = keymap[ch];
-  if (code >= 'a' && code <= 'z') {
+  if (code >= 0x20 && code <= 0x7e) {
     kb_put_key(code);
   } else if (code == BACKSPACE) {
     kb_put_key('\b');
