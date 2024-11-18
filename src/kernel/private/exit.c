@@ -26,11 +26,12 @@ static void awake_father_and_become_zombie(pcb_t *proc) {
       if (xchg(&proc->lock, 1) == 0) {
         fa = proc->ptree.fa;
       } else {
-        should_revert = true;
         break;
       }
       if (xchg(&fa->lock, 1) == 0) {
         done = true;
+      } else {
+        should_revert = true;
       }
     } while (0);
     if (done) {
